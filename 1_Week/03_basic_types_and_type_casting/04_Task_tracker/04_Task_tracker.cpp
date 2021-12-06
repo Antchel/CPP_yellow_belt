@@ -1,23 +1,61 @@
 #include <iostream>
-#include <chrono>
+#include <map>
 
 using namespace std;
 
+enum class TaskStatus {
+	NEW,
+	IN_PROGRESS,
+	TESTING,
+	DONE
+};
+
+using TasksInfo = map<TaskStatus, int>;
+
+class TeamTasks {
+public:
+	const TasksInfo& GetPersonalTaskInfo(const string& person) const {
+		return storage.at(person);
+	}
+
+	void AddNewTask(const string& person) {
+		if (storage.find(person) == storage.end()) {
+			storage[person] = { {TaskStatus::DONE, 0},
+								{TaskStatus::IN_PROGRESS, 0},
+								{TaskStatus::NEW, 0},
+								{TaskStatus::TESTING, 0} };
+		}
+		storage[person][TaskStatus::NEW]++;
+	}
+
+	tuple<TasksInfo, TasksInfo> PerformPersonTasks(const string& person, int task_count) {
+		return { {}, {} };
+	}
+
+private:
+	map<string, TasksInfo> storage;
+
+};
+
+void PrintTasksInfo(const TasksInfo& info) {
+	cout << info.at(TaskStatus::NEW) << " new tasks" << " , " <<
+		info.at(TaskStatus::IN_PROGRESS) << " tasks in progress" << " , " <<
+		info.at(TaskStatus::TESTING) << " tasks are been testing" << " , " <<
+		info.at(TaskStatus::DONE) << " tasks are been done" << endl;
+}
+
 int main()
 {
-    int N = 10000;
-    int sum = 0;
-    auto start = chrono::steady_clock::now();
-    
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            for (int k = 0; k < N; k++) {
-                sum += k;
-            }
-        }
-    }
-    auto end = chrono::steady_clock::now();
-    auto elapsed_ms = chrono::duration_cast<chrono::microseconds>(end - start);
-    cout << "The time is = " << elapsed_ms.count() << endl;
-    cout << sum << endl;
+	try {
+		TeamTasks tasks;
+		TasksInfo info;
+		tasks.AddNewTask("Ivan");
+		tasks.AddNewTask("Ivan");
+		tasks.AddNewTask("Ivan");
+		PrintTasksInfo(tasks.GetPersonalTaskInfo("Ivan"));
+	} catch (exception& e) {
+		cout << e.what() << endl;
+	}
+	
+	return 0;
 }
