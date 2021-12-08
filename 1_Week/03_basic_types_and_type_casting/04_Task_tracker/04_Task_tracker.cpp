@@ -42,6 +42,7 @@ public:
 				}
 				else {
 					task = TaskStatus::IN_PROGRESS;
+					task_count++;
 					untouchedTasks.erase(TaskStatus::NEW);
 				}
 				break;
@@ -54,6 +55,7 @@ public:
 				}
 				else {
 					task = TaskStatus::TESTING;
+					task_count++;
 					untouchedTasks.erase(TaskStatus::IN_PROGRESS);
 				}
 				break;
@@ -119,8 +121,6 @@ int main()
 		PrintTasksInfo(updated_tasks);
 		cout << "Untouched Ivan's tasks: ";
 		PrintTasksInfo(untouched_tasks);
-
-
 
 	} catch (exception& e) {
 		cout << e.what() << endl;
