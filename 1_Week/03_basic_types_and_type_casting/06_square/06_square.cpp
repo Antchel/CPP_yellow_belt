@@ -35,6 +35,7 @@ vector<T> Sqr(vector<T>& v) {
 int main()
 {
     vector<int> v = { 1,2,3 };
+    cout << v.front() << endl;
     cout << "vector:";
     for (int x : Sqr(v)) {
         cout << ' ' << x;
@@ -50,5 +51,9 @@ int main()
     {
         cout << x.first << ' ' << x.second.first <<
             ' ' << x.second.second << endl;
+    }
+    string str = "length";
+    for (int i = 0; i < str.length(); i++) {
+        cout << str[i] << endl;
     }
 }
