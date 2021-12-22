@@ -5,25 +5,19 @@
 using namespace std;
 
 vector<string> SplitIntoWords(const string& s) {
-	vector<string> words;
-	auto it = begin(s);
-	while (it != end(s)) {
-		auto tmp = find(it, end(s), ' ');
-		string word;
-		if (tmp != end(s)) {
-			while (it != tmp) {
-				word += *it;
-				it++;
-			}
-			words.push_back(word);
-			it = ++tmp;
-		}
-		else
-		{
-			break;
+	vector<string> result;
+	auto begin_it = begin(s);
+	for (auto it = find(begin(s), end(s), ' ');
+		it != end(s);
+		it = find(next(it), end(s), ' ')) {
+		if (*it != 0) {
+			result.push_back(string(begin_it, it));
+			begin_it = ++it;
 		}
 	}
-	return words;
+	result.push_back(string(begin_it, end(s)));
+
+	return result;
 }
 
 int main()
