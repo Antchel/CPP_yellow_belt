@@ -8,8 +8,9 @@ using namespace std;
 
 set<int>::const_iterator FindNearestElement(const set<int>& numbers, int border) {
 	if (numbers.empty()) return numbers.end();
-	if (numbers.find(border) != numbers.end()) return numbers.find(border);
+	
 	set<int>::const_iterator prev_it = numbers.end();
+	
 	for (auto it = numbers.begin(); it != numbers.end(); it++) {
 		if (border == *it) return it;
 		else if (border < *it) {
