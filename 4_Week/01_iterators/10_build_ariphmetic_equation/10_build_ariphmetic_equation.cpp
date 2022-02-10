@@ -28,5 +28,4 @@ int main() {
 		ss << s_;
 	}
 	cout << ss.str() << endl;
-	cout << true << endl;
 }
