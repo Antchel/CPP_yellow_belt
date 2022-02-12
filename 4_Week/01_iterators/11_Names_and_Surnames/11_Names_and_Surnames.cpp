@@ -1,20 +1,45 @@
-// 11_Names_and_Surnames.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+class Person
+{
+public:
+	void ChangeFirstName(int year, const string& first_name) {
+		this->first_name[year] = first_name;
+	}
+
+	void ChangeLastName(int year, const string& last_name) {
+		this->second_name[year] = last_name;
+	}
+
+	string GetFullName(int year) {
+		string name;
+		name = first_name[year] + " " + second_name[year];
+		return name;
+	}
+private:
+	map<int, string> first_name;
+	map<int, string> second_name;
+};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Person person;
+	person.ChangeFirstName(1965, "Polina");
+	person.ChangeLastName(1967, "Sergeeva");
+	for (int year : {1900, 1965, 1990}) {
+		cout << person.GetFullName(year) << endl;
+	}
+	person.ChangeFirstName(1970, "Appolinaria");
+	for (int year : {1969, 1970}) {
+		cout << person.GetFullName(year) << endl;
+	}
+	person.ChangeLastName(1968, "Volkova");
+	for (int year : {1969, 1970}) {
+			cout << person.GetFullName(year) << endl;
+	}
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
